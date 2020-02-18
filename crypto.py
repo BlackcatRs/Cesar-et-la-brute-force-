@@ -6,7 +6,6 @@ txt="BONJOUR"
 clef=3
 
 
-
 def Ecesar(txt, clef, paq=1) :
     list = []
     var=paquet(txt, 1)
