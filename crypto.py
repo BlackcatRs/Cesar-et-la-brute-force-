@@ -31,9 +31,8 @@ list=[1, 2, 5, 6, 7, 1]
 list1=[]
 paq = 3
 
-
+'''#1er 2 chiffre
 b=0
-
 i=0
 a=''
 
@@ -44,6 +43,7 @@ while i < paq:
 
 list1.append(a)
 
+ #2eme 2 chifrre
 i=0
 c=''
 while i < paq:
@@ -53,7 +53,15 @@ while i < paq:
 
 list1.append(c)
 
+'''
+b=0
+for values in range(paq):
+    i=0
+    a=''
+    while i < paq:
+        a+=str(list[b])
+        i+=1
+        b+=1
+    list1.append(a)
+
 print(list1)
-
-
-#
