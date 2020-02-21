@@ -47,3 +47,9 @@ def Ecesar(txt, clef, paq=2) :
 
 print("Voila votre text <<", txt,">> codee par paquet de 1 : ", Ecesar(txt, clef))
 print(paquet(txt, 1).values())
+
+sds = [1, 17, 1, 42%26, 14, 23, 17, 28%26]
+
+for value in sds:
+    a=xedoc(value)
+    print(a)
