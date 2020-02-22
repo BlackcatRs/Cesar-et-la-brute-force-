@@ -3,9 +3,13 @@
 from OutilsCrypto import *
 
 
-txt = input("Entrez votre texte ici : ")
-paq = int(input("Entrez nobre de paquet : "))
-clef = int(input("Entrez votre clef : "))
+txt = 'bonjour'
+paq = 1
+clef = 3
+
+#txt = input("Entrez votre texte ici : ")
+#paq = int(input("Entrez nobre de paquet : "))
+#clef = int(input("Entrez votre clef : "))
 
 #transformer le dictionnaire en list
 def dicLit(dic):
@@ -29,12 +33,13 @@ def intStr(intList):
     return list1
 
 #ajouter les 0 devant un nombre pour creer les paquet
-def addpaq(strlist):
+def addpaq(strlist, paq):
     compteur=0
     for value in strlist:
         if len(value) < paq*2:
-            strlist[compteur]='0'+value
-        compteur=+1
+            a=paq*2-len(value)
+            strlist[compteur]=(a*'0')+value
+        compteur+=1
 
 #separer les chiffre 2 par 2 et retourne une liste int
 def separater(strlist, paq):
@@ -79,7 +84,8 @@ def Ecesar(txt, paq, clef) :
     list1 = intStr(list)
 
     #ajouter les 0 devant un nombre pour creer les paquet
-    addpaq(list1)
+    addpaq(list1, paq)
+
 
     #separer les chiffre 2 par 2 et returne une list int
     list2 = separater(list1, paq)
