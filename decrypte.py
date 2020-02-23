@@ -2,90 +2,72 @@
 
 from OutilsCrypto import *
 
+#transformer les chiffre regroupe 2 par 2 en lettre
+def chiffreLettre(listInt):
+    motcrypte = ''
+    for element in listInt:
+        motcrypte+=xedoc(element%26)
+    return motcrypte
 
-txt = input("Entrez votre texte ici : ")
-paq = int(input("Entrez nobre de paquet : "))
-clef = int(input("Entrez votre clef : "))
+def decrypt(listInt, clef):
+    listDecypte=[]
+    for value in listInt:
+        listDecypte.append((value-clef)%2526)
+    return listDecypte
 
-#transformer le dictionnaire en list
-def dicLit(dic):
-    list = []
-    for value in dic.values():
-        list.append(value)
-    return list
 
-#ajouter la clef a la liste
-def addclef(intList, clef):
-    compteur=0
-    for value in intList:
-        intList[compteur]+=clef
-        compteur+=1
-
-#transformer les int de la liste en str et stocker dans une autre liste "liste1"
 def intStr(intList):
     list1 = []
     for value in intList:
         list1.append(str(value))
     return list1
 
-#ajouter les 0 devant un nombre pour creer les paquet
-def addpaq(strlist):
+def addpaq(strlist, paq):
     compteur=0
     for value in strlist:
         if len(value) < paq*2:
-            strlist[compteur]='0'+value
-        compteur=+1
+            a=paq*2-len(value)
+            strlist[compteur]=(a*'0')+value
+        compteur+=1
 
 #separer les chiffre 2 par 2 et retourne une liste int
-def separater(strlist, paq):
-    list2 = []
-    for value in strlist:
-        compteur1 = 0
-        compteurL = 0
+def separaterStr(strList):
+    list = []
+    for value in strList:
+        modulo=len(value)%2
+        i=0
 
-        while compteur1 < paq:
+        if modulo == 1:
+            a=value[i]
+            list.append(int(a))
+            i+=1
+
+        e=int((len(value)-modulo)/2)
+
+        #a modifier
+        for z in range(e):
             a=''
-            compteur = 0
-            while compteur < 2:
-                a+=value[compteurL]
-                compteur+=1
-                compteurL+=1
-            list2.append(int(a))
-            compteur1+=1
-    return list2
-
-#transformer les chiffre regroupe 2 par 2 en lettre
-def chiffreLettre(listInt):
-    motcrypte = ''
-    for element in listInt:
-        motcrypte+=xedoc(element)
-    return motcrypte
-
-    return motcrypte
+            x=0
+            while x < 2:
+                a+=value[i]
+                i+=1
+                x+=1
+            list.append(int(a))
 
 
-def Ecesar(txt, paq, clef) :
-
-    #transformer le texte en chiffre par paquet de paq et stocker dans un dictionnaire
-    dic=paquet(txt, paq)
-
-    #transformer le dictionnaire en list
-    list = dicLit(dic)
-
-    #ajouter la clef a la liste "list"
-    addclef(list, clef)
-
-    #transformer les int de la liste en str et stocker dans une autre liste str "list1"
-    list1 = intStr(list)
-
-    #ajouter les 0 devant un nombre pour creer les paquet
-    addpaq(list1)
-
-    #separer les chiffre 2 par 2 et returne une list int
-    list2 = separater(list1, paq)
-
-    #transformer les chiffre regroupe 2 par 2 en lettre
-    return chiffreLettre(list2)
+    return list
 
 
-print(Ecesar(txt, paq, clef ))
+
+#message crypte
+#list=[2138, 523, 1651, 1650, 712, 1434, 1834, 2338, 412, 721, 212, 708]
+list=[114, 1309, 1420, 1700]
+#strlist = ['117', '1312', '1423', '1703']
+intlist = [2138, 523, 1651, 1650, 712, 1434, 1834, 2338, 412, 721, 212, 708]
+
+for number in range(2526):
+    a= decrypt(intlist, number)
+    b= intStr(a)
+    c= separaterStr(b)
+    d= chiffreLettre(c)
+    print(d)
